@@ -31,7 +31,7 @@ gridItems.forEach(item => {
         const value = item.getAttribute("data-value");
 
         if (value === "CLEAR") {
-            display.textContent = "";
+            display.textContent = "0";
         } else {
             display.textContent = display.textContent === "0" ? value : display.textContent + value;
         }
