@@ -37,6 +37,7 @@ initialiseDisplay();
 
 const gridItems = document.querySelectorAll(".grid-item");
 
+// Inside the event listener for button clicks
 gridItems.forEach(item => {
     item.addEventListener("click", () => {
         const value = item.getAttribute("data-value");
@@ -44,6 +45,18 @@ gridItems.forEach(item => {
         if (value === "CLEAR") {
             initialiseDisplay();
             return;
+        }
+
+        // Add this block to handle the decimal point
+        if (value === ".") {
+            // If the display is currently "0", start with "0."
+            if (display.textContent === "0") {
+                display.textContent = "0."; // Start with "0."
+            } else if (!display.textContent.includes(".")) {
+                // Only add "." if it’s not already in the current number
+                display.textContent += ".";
+            }
+            return; // Exit to prevent further processing of "."
         }
 
         if (["+", "-", "X", "÷"].includes(value)) {
@@ -68,8 +81,8 @@ gridItems.forEach(item => {
             numTwo += value;
             display.textContent += value;
         } else {
-        
-            display.textContent = display.textContent === "0" ? value : display.textContent + value;
+            // If display is "0", replace it with the new number or start with "0."
+            display.textContent = display.textContent === "0" ? (value === "." ? "0." : value) : display.textContent + value;
             numOne += value;
         }
     });
