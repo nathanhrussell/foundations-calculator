@@ -1,17 +1,17 @@
 function add(a, b) {
-    return a + b
+    return a + b;
 }
 
 function subtract(a, b) {
-    return a - b
+    return a - b;
 }
 
 function multiply(a, b) {
-    return a * b
+    return a * b;
 }
 
 function divide(a, b) {
-    return a / b
+    return a / b;
 }
 
 let numOne = "";
@@ -19,8 +19,8 @@ let numTwo = "";
 let operator = "";
 let isOperatorClicked = false;
 
-function operate(operator, a, b,) {
-    return operator(a, b)
+function operate(operator, a, b) {
+    return operator(a, b);
 }
 
 const display = document.getElementById("display");
@@ -43,6 +43,18 @@ gridItems.forEach(item => {
 
         if (value === "CLEAR") {
             initialiseDisplay();
+            return;
+        }
+
+        if (value === "DEL") {
+            // Handle deleting the last character
+            if (isOperatorClicked && numTwo) {
+                numTwo = numTwo.slice(0, -1);
+                display.textContent = numOne + operator + numTwo;
+            } else if (!isOperatorClicked && numOne) {
+                numOne = numOne.slice(0, -1);
+                display.textContent = numOne || "0"; // Display "0" if numOne is empty
+            }
             return;
         }
 
@@ -88,7 +100,6 @@ gridItems.forEach(item => {
         }
     });
 });
-
 
 function calculateResult() {
     const num1 = parseFloat(numOne);
