@@ -112,12 +112,13 @@ function calculateResult() {
             result = "Error";
     }
 
+    if (typeof result === "number" && !isNaN(result)) {
+        result = parseFloat(result.toFixed(4));
+    }
+
     display.textContent = result.toString();
     numOne = result.toString();
     operator = "";
     numTwo = "";
     isOperatorClicked = false;
 }
-
-// TODO: ROUND NUMBERS WITH LONG DECIMALS SO THEY DON'T OVERFLOW THE DISPLAY
-// TODO: REDUCE TEXT SIZE WHEN LONG NUMBERS ENTERED (WITH A MIN VALUE TO ENSURE READABILITY?)
